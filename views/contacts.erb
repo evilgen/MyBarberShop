@@ -1,0 +1,19 @@
+<h2>Оставить свои данные.</h2>
+<p>На этой странице вы сможете оставить свои контакты и написать сообщение в Barber Shop</p>
+
+<form action="/contacts" method="POST" role="form">
+
+  <div class="form-group">
+    <label>Email address</label>
+    <input name="email" type="email" class="form-control" placeholder="Email address" value="<%=@email%>">
+  </div>
+
+<div class="form-group">
+    <label>Сообщение</label>
+    <textarea name="letter" class="form-control" rows="3" placeholder="Введите текст вашего письма"></textarea>
+  </div>
+
+ 
+  <button type="submit" class="btn btn-primary">Отправить</button>
+
+</form>
