@@ -1,6 +1,23 @@
 require 'rubygems'            
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+configure do 
+	@db = SQLite3::Database.new 'BarberShop.db'
+	@db.execute 'CREATE TABLE IF NOT EXISTS `Contacts` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`Email`	TEXT,
+	`Message`	TEXT);
+
+				CREATE TABLE IF NOT EXISTS `Users` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`Name`	TEXT,
+	`Phone`	TEXT,
+	`DateStamp`	TEXT,
+	`Barber`	TEXT,
+	`Color`	TEXT)'
+end
 
 get '/' do
  	@message = 'Hello, this is not original page!'
