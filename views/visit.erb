@@ -22,9 +22,9 @@
     <label>Выберите парикмахера.</label>
     <select class="form-control" name="master">
       <option selected="selected">Выберите вашего мастера</option>
-      <option>Walter White</option>
-      <option>Jessie Pinkman</option>
-      <option>Gus Fring</option>
+      <option <%= @master == 'Walter White'? 'selected':''%>>Walter White</option>
+      <option <%= @master == 'Jessie Pinkman'? 'selected':''%>>Jessie Pinkman</option>
+      <option <%= @master == 'Gus Fring'? 'selected':''%>>Gus Fring</option>
     </select>
   </div>
 
