@@ -4,19 +4,17 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do 
-	@db = SQLite3::Database.new 'BarberShop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS `Contacts` (
-	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Email`	TEXT,
-	`Message`	TEXT);
-
-				CREATE TABLE IF NOT EXISTS `Users` (
-	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Name`	TEXT,
-	`Phone`	TEXT,
-	`DateStamp`	TEXT,
-	`Barber`	TEXT,
-	`Color`	TEXT)'
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS
+	`Users`
+	(
+		`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+		`Name`	TEXT,
+		`Phone`	TEXT,
+		`DateStamp`	TEXT,
+		`Barber`	TEXT,
+		`Color`	TEXT
+	)'
 end
 
 get '/' do
@@ -60,11 +58,28 @@ post '/visit' do
 		f.write "Client name: #{@username}, Phone number: #{@phone}, Date and time: #{@datetime}, Master name: #{@master}, Selected color: #{@color}\n"
 		f.close
 
+db = get_db
+db.execute 'insert into
+Users
+(
+	Name,
+	Phone,
+	DateStamp,
+	Barber,
+	Color
+)
+values (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @master, @color]
+
 		@message = "Thank you #{@username}, we will wait for you."
 
 		erb "#{@message}"
 	end
 end
+
+def get_db
+	return SQLite3::Database.new 'BarberShop.db'
+end
+
 
 post '/contacts' do
 	@email = params[:email]
