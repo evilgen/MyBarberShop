@@ -22,10 +22,15 @@
     <label>Выберите парикмахера.</label>
     <select class="form-control" name="master">
       <option selected="selected">Выберите вашего мастера</option>
-      <option <%= @master == 'Walter White'? 'selected':''%>>Walter White</option>
+      <!-- Подтягиваем список парикмахеров из БД -->
+      <% @barberslist.each do |row| %>
+        <option <%= @master == row['Barber']? 'selected':''%>><%=row['Barber']%></option>
+      <% end %>
+        <!-- Старый вариант жестко прописанных значений -->
+<!--       <option <%= @master == 'Walter White'? 'selected':''%>>Walter White</option>
       <option <%= @master == 'Jessie Pinkman'? 'selected':''%>>Jessie Pinkman</option>
       <option <%= @master == 'Gus Fring'? 'selected':''%>>Gus Fring</option>
-    </select>
+ -->    </select>
   </div>
 
   <div class="form-group">

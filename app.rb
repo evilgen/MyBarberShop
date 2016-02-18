@@ -21,6 +21,12 @@ def seed_db db, barbers
 	end	
 end
 
+before do
+	db = get_db
+	@barberslist = db.execute 'select * from Barbers'
+
+end
+
 configure do 
 	db = get_db
 	db.execute 'CREATE TABLE IF NOT EXISTS
